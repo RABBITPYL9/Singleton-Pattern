@@ -19,6 +19,6 @@ class Singleton(type):
 
 class DDbConnection(metaclass=Singleton):
     def __init__(self):
-        conn1 = psycopg2.connect(dbname='singleton', user='admin', password='admin', host='localhost')
-        cursor = conn1.cursor()
+        db_connection = psycopg2.connect(dbname='singleton', user='admin', password='admin', host='localhost')
+        cursor = db_connection.cursor()
         print('Initializing singleton database connection... ')
