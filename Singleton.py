@@ -10,29 +10,23 @@ class Singleton(type):
     _instances = {}
 
 
-
     def __call__(cls, *args, **kwargs):
         if cls not in cls._instances:
             cls._instances[cls] = super(Singleton, cls).__call__(*args, **kwargs)
         return cls._instances[cls]
-    
 
-class Database(metaclass=Singleton):
-    connection = None
-    
-    def connect(self):
-        if self.connection is None:
-            self.connection = psycopg2.connect(dbname='statsmon', user='admin', password='admin', host='192.168.2.197')
-            self.cursorobj = self.connection.cursor()
-            self.execute = self.cursorobj.execute("""
+
+class DDbConnection(metaclass=Singleton):
+    def __init__(self):
+        db_connection = psycopg2.connect(dbname='statsmon', user='admin', password='admin', host='localhost')
+        
+        cursor = db_connection.cursor()
+        request = """
                  update public.tests
                  set status = 'single'
-                 where id = 315""")
-            self.cursorobj.execute("commit;")
-        return self.cursorobj
+                 where id = 315"""
+        cursor.execute(request)
+        cursor.execute("commit;")
 
 
-
-
-db1 = Database().connect()
-print ("Database Objects DB1", db1)
+db_connect = DDbConnection()
