@@ -22,7 +22,7 @@ class Database(metaclass=Singleton):
     
     def connect(self):
         if self.connection is None:
-            self.connection = psycopg2.connect(dbname='statsmon', user='admin', password='upt24', host='192.168.2.197')
+            self.connection = psycopg2.connect(dbname='statsmon', user='admin', password='admin', host='192.168.2.197')
             self.cursorobj = self.connection.cursor()
             self.execute = self.cursorobj.execute("""
                  update public.tests
