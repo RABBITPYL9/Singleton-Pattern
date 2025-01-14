@@ -16,6 +16,7 @@ class Singleton(type):
         return cls._instances[cls]
 
 
+#2s
 class DDbConnection(metaclass=Singleton):
     def __init__(self):
         db_connection = psycopg2.connect(dbname='statsmon', user='admin', password='admin', host='localhost')
