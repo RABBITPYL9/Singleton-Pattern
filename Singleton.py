@@ -1,7 +1,8 @@
 
 import psycopg2
+#NEW
 
-class SingletonN(type):
+class Singleton123(type):
 
     """
     Метакласс Singleton. Необходим для ограничения кол-ва инстансов класса (1 инстанс)
