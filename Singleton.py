@@ -2,7 +2,7 @@
 import psycopg2
 #NEW
 
-class SingletonF(type):
+class Singleton(type):
 
     """
     Метакласс Singleton. Необходим для ограничения кол-ва инстансов класса (1 инстанс)
@@ -13,12 +13,12 @@ class SingletonF(type):
 
     def __call__(cls, *args, **kwargs):
         if cls not in cls._instances:
-            cls._instances[cls] = super(SingletonF, cls).__call__(*args, **kwargs)
+            cls._instances[cls] = super(Singleton, cls).__call__(*args, **kwargs)
         return cls._instances[cls]
 
 
 #2s
-class DDbConnection(metaclass=SingletonF):
+class DDbConnection(metaclass=Singleton):
     def __init__(self):
         db_connection = psycopg2.connect(dbname='statsmon', user='admin', password='admin', host='localhost')
         
